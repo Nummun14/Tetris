@@ -1,7 +1,7 @@
 package utilities;
 
 public class TetronimoRotation {
-    public double rotation;
+    private double rotation;
 
     public TetronimoRotation() {
         this(0.0);
@@ -13,5 +13,9 @@ public class TetronimoRotation {
 
     public void setRotation(double rotation) {
         this.rotation = rotation;
+    }
+
+    public double getRotation() {
+        return rotation;
     }
 }
