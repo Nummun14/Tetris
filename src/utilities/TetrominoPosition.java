@@ -1,8 +1,8 @@
 package utilities;
 
 public class TetrominoPosition {
-    public final TetrominoTranslation tetrominoTranslation;
-    public final TetronimoRotation tetronimoRotation;
+    private final TetrominoTranslation tetrominoTranslation;
+    private final TetronimoRotation tetronimoRotation;
 
     public TetrominoPosition() {
         this(new TetrominoTranslation(), new TetronimoRotation());
@@ -15,5 +15,13 @@ public class TetrominoPosition {
 
     public TetrominoPosition(double x, double y, double rotation) {
         this(new TetrominoTranslation(x, y), new TetronimoRotation(rotation));
+    }
+
+    public TetrominoTranslation getTranslation() {
+        return tetrominoTranslation;
+    }
+
+    public TetronimoRotation getRotation() {
+        return tetronimoRotation;
     }
 }
