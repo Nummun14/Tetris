@@ -2,3 +2,5 @@
 *.bin
 *.lock
 *.properties
+*.xml
+*.iml
