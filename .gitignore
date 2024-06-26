@@ -4,3 +4,12 @@
 *.properties
 *.xml
 *.iml
+*.probe
+*.bin
+Tetris-game/core/build/libs/core-1.0.jar
+Tetris-game/core/build/tmp/compileJava/compileTransaction/stash-dir/LeftLTetronimo.class.uniqueId1
+Tetris-game/core/build/tmp/compileJava/compileTransaction/stash-dir/MainMenuScreen.class.uniqueId1
+Tetris-game/core/build/tmp/compileJava/previous-compilation-data.bin
+Tetris-game/core/build/tmp/compileJava/compileTransaction/stash-dir/LeftLTetronimo.class.uniqueId1
+Tetris-game/core/build/libs/core-1.0.jar
+Tetris-game/core/build/classes/java/main/com/mygdx/tetris/tetronimoes/Tetronimo.class

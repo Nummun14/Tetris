@@ -13,14 +13,14 @@ import com.mygdx.tetris.tetronimoes.LeftLTetronimo;
 import com.mygdx.tetris.tetronimoes.Tetronimo;
 
 public class GameScreen implements Screen {
-    final Tetris game;
-    Texture fullCell;
-    Texture limitLine;
-    OrthographicCamera camera;
-    int score;
-    Array<Cell> boardCells;
-    Tetronimo tetronimo;
-    long lastMovedRightTime, lastMovedLeftTime, lastMovedDownTime, lastRotateTime, lastFallTime;
+    private final Tetris game;
+    private final Texture fullCell;
+    private final Texture limitLine;
+    private final OrthographicCamera camera;
+    private final Array<Cell> boardCells;
+    private int score;
+    private Tetronimo tetronimo;
+    private long lastMovedRightTime, lastMovedLeftTime, lastMovedDownTime, lastRotateTime, lastFallTime;
 
     public GameScreen(final Tetris game) {
         this.game = game;
@@ -73,6 +73,7 @@ public class GameScreen implements Screen {
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S)) {
             if (TimeUtils.timeSinceMillis(lastMovedDownTime) > TetrisConstants.TIME_BETWEEN_MOVES_MILLISECONDS) {
                 tetronimo.moveDown(boardCells);
+                score += 1;
                 lastMovedDownTime = TimeUtils.millis();
             }
         }
@@ -88,6 +89,7 @@ public class GameScreen implements Screen {
             lastFallTime = TimeUtils.millis();
         }
         if (!tetronimo.isFalling()) {
+            score += 10;
             updateBoard();
             spawnTetromino();
         }
@@ -168,8 +170,8 @@ public class GameScreen implements Screen {
     }
 
     private void updateBoard() {
-        for (Cell cell : tetronimo.getTetronimoCells()) {
-            for (Cell boardCell : boardCells) {
+        for (Cell boardCell : boardCells) {
+            for (Cell cell : tetronimo.getTetronimoCells()) {
                 if (cell.equals(boardCell)) {
                     boardCell.isFull = true;
                 }
