@@ -167,27 +167,24 @@ public class GameScreen implements Screen {
     }
 
     private void drawCells() {
-        if (boardCells.size == 0) {
+        if (boardCells.size == 0)
             createCells();
-        }
         for (Cell cell : boardCells) {
-            if (cell.isFull() && cell.currentState != CellState.EMPTY)
+            if (cell.isFull())
                 game.batch.draw(cell.currentState.texture, cell.x, cell.y);
         }
     }
 
     private void createCells() {
-        for (int i = 0; i < TetrisConstants.SCREEN_HEIGHT; i += TetrisConstants.CELL_SIZE) {
-            for (int j = 0; j < TetrisConstants.SCREEN_WIDTH; j += TetrisConstants.CELL_SIZE) {
-                boardCells.add(new Cell(j, i));
-            }
+        for (int cellY = 0; cellY < TetrisConstants.SCREEN_HEIGHT; cellY += TetrisConstants.CELL_SIZE) {
+            for (int cellX = 0; cellX < TetrisConstants.SCREEN_WIDTH; cellX += TetrisConstants.CELL_SIZE)
+                boardCells.add(new Cell(cellX, cellY));
         }
     }
 
     private void drawTetromino() {
-        for (Cell cell : tetronimo.getTetronimoCells()) {
+        for (Cell cell : tetronimo.getTetronimoCells())
             game.batch.draw(cell.currentState.texture, cell.x, cell.y);
-        }
     }
 
     private void updateBoard() {
