@@ -1,10 +1,10 @@
 package com.mygdx.tetris.tetronimoes;
 
 import com.badlogic.gdx.utils.Array;
-import com.mygdx.tetris.cell.Cell;
 import com.mygdx.tetris.TetrisConstants;
+import com.mygdx.tetris.cell.Cell;
 
-public class MountTetronimo extends Tetronimo{
+public class MountTetronimo extends Tetronimo {
     public MountTetronimo(Cell centerCell, Array<Cell> boardCells) {
         super(centerCell, boardCells, TetrisConstants.MOUNT_TETRONIMO_COLOR);
     }
@@ -18,11 +18,7 @@ public class MountTetronimo extends Tetronimo{
         newCells.add(new Cell(tetronimoCells.get(0).x + TetrisConstants.CELL_SIZE, tetronimoCells.get(0).y, tetronimoCells.get(0).currentState));
 
         if (isPlaceable(newCells, boardCells)) {
-            isRotationStateUp = true;
-            isRotationStateDown = false;
-            isRotationStateLeft = false;
-            isRotationStateRight = false;
-
+            currentRotationState = TetronimoState.UP;
             tetronimoCells = newCells;
         }
     }
@@ -36,11 +32,7 @@ public class MountTetronimo extends Tetronimo{
         newCells.add(new Cell(tetronimoCells.get(0).x, tetronimoCells.get(0).y + TetrisConstants.CELL_SIZE, tetronimoCells.get(0).currentState));
 
         if (isPlaceable(newCells, boardCells)) {
-            isRotationStateRight = true;
-            isRotationStateUp = false;
-            isRotationStateDown = false;
-            isRotationStateLeft = false;
-
+            currentRotationState = TetronimoState.RIGHT;
             tetronimoCells = newCells;
         }
     }
@@ -54,11 +46,7 @@ public class MountTetronimo extends Tetronimo{
         newCells.add(new Cell(tetronimoCells.get(0).x + TetrisConstants.CELL_SIZE, tetronimoCells.get(0).y, tetronimoCells.get(0).currentState));
 
         if (isPlaceable(newCells, boardCells)) {
-            isRotationStateDown = true;
-            isRotationStateUp = false;
-            isRotationStateRight = false;
-            isRotationStateLeft = false;
-
+            currentRotationState = TetronimoState.DOWN;
             tetronimoCells = newCells;
         }
     }
@@ -72,11 +60,7 @@ public class MountTetronimo extends Tetronimo{
         newCells.add(new Cell(tetronimoCells.get(0).x, tetronimoCells.get(0).y + TetrisConstants.CELL_SIZE, tetronimoCells.get(0).currentState));
 
         if (isPlaceable(newCells, boardCells)) {
-            isRotationStateLeft = true;
-            isRotationStateUp = false;
-            isRotationStateRight = false;
-            isRotationStateDown = false;
-
+            currentRotationState = TetronimoState.LEFT;
             tetronimoCells = newCells;
         }
     }

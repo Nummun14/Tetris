@@ -9,11 +9,7 @@ import com.mygdx.tetris.cell.CellState;
 public abstract class Tetronimo {
     public boolean isFalling;
     Array<Cell> tetronimoCells;
-    boolean
-            isRotationStateUp,
-            isRotationStateRight,
-            isRotationStateDown,
-            isRotationStateLeft;
+    TetronimoState currentRotationState;
 
     Tetronimo(Cell centerCell, Array<Cell> boardCells, CellState cellState) {
         centerCell.currentState = cellState;
@@ -25,14 +21,20 @@ public abstract class Tetronimo {
     }
 
     public void rotate(Array<Cell> boardCells) {
-        if (isRotationStateUp) {
-            setRotationStateRight(boardCells);
-        } else if (isRotationStateRight) {
-            setRotationStateDown(boardCells);
-        } else if (isRotationStateDown) {
-            setRotationStateLeft(boardCells);
-        } else if (isRotationStateLeft)
-            setRotationStateUp(boardCells);
+        switch (currentRotationState) {
+            case UP:
+                setRotationStateRight(boardCells);
+                break;
+            case RIGHT:
+                setRotationStateDown(boardCells);
+                break;
+            case DOWN:
+                setRotationStateLeft(boardCells);
+                break;
+            case LEFT:
+                setRotationStateUp(boardCells);
+                break;
+        }
     }
 
     public void moveLeft(Array<Cell> boardCells) {

@@ -12,20 +12,24 @@ public class SquareTetronimo extends Tetronimo {
     @Override
     void setRotationStateUp(Array<Cell> boardCells) {
         setRotationStateLeft(boardCells);
+        currentRotationState = TetronimoState.UP;
     }
 
     @Override
     void setRotationStateRight(Array<Cell> boardCells) {
         setRotationStateLeft(boardCells);
+        currentRotationState = TetronimoState.RIGHT;
     }
 
     @Override
     void setRotationStateDown(Array<Cell> boardCells) {
         setRotationStateLeft(boardCells);
+        currentRotationState = TetronimoState.DOWN;
     }
 
     @Override
     void setRotationStateLeft(Array<Cell> boardCells) {
+
         Array<Cell> newCells = new Array<>();
         newCells.add(tetronimoCells.get(0));
         newCells.add(new Cell(tetronimoCells.get(0).x + TetrisConstants.CELL_SIZE, tetronimoCells.get(0).y, tetronimoCells.get(0).currentState));
@@ -33,11 +37,7 @@ public class SquareTetronimo extends Tetronimo {
         newCells.add(new Cell(tetronimoCells.get(0).x + TetrisConstants.CELL_SIZE, tetronimoCells.get(0).y + TetrisConstants.CELL_SIZE, tetronimoCells.get(0).currentState));
 
         if (isPlaceable(newCells, boardCells)) {
-            isRotationStateUp = true;
-            isRotationStateRight = false;
-            isRotationStateDown = false;
-            isRotationStateLeft = false;
-
+            currentRotationState = TetronimoState.LEFT;
             tetronimoCells = newCells;
         }
     }
