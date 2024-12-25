@@ -10,13 +10,13 @@ public class TetrisConstants {
             SCREEN_CENTER_Y = SCREEN_HEIGHT / 2,
             GAME_HEIGHT = 450,
             GAME_WIDTH = 300,
-            SPAWN_HEIGHT = 480,
+            CELL_SPAWN_HEIGHT = 480,
             GAME_LOWEST_X = 0,
             GAME_LOWEST_Y = 0;
     public static final int CELL_SIZE = 30;
     public static final int LIMIT_LINE_LENGTH = 60;
     public static final double
-            TIME_BETWEEN_MOVES_MILLISECONDS = 200,
+            TIME_BETWEEN_MOVES_MILLISECONDS = 150,
             TIME_BETWEEN_DROPS_MILLISECONDS = 400;
     public static final int
             SCORE_X = 10,

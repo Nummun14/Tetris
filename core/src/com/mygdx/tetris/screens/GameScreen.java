@@ -24,7 +24,11 @@ public class GameScreen implements Screen {
     private final Array<Cell> boardCells;
     private int score;
     private Tetronimo tetronimo;
-    private long lastMovedRightTime, lastMovedLeftTime, lastMovedDownTime, lastRotateTime, lastFallTime;
+    private long
+            lastMovedRightTime,
+            lastMovedLeftTime,
+            lastMovedDownTime,
+            lastRotateTime;
 
     public GameScreen(final Tetris game) {
         this.game = game;
@@ -42,7 +46,6 @@ public class GameScreen implements Screen {
         lastMovedLeftTime = 0;
         lastMovedDownTime = 0;
         lastRotateTime = 0;
-        lastFallTime = 0;
 
         spawnTetromino();
     }
@@ -87,9 +90,9 @@ public class GameScreen implements Screen {
             }
         }
 
-        if (TimeUtils.timeSinceMillis(lastFallTime) > TetrisConstants.TIME_BETWEEN_DROPS_MILLISECONDS) {
+        if (TimeUtils.timeSinceMillis(lastMovedDownTime) > TetrisConstants.TIME_BETWEEN_DROPS_MILLISECONDS) {
             tetronimo.moveDown(boardCells);
-            lastFallTime = TimeUtils.millis();
+            lastMovedDownTime = TimeUtils.millis();
         }
 
         if (!tetronimo.isFalling()) {
@@ -168,25 +171,25 @@ public class GameScreen implements Screen {
         int random = MathUtils.random(6);
         switch (random){
             case 0:
-                tetronimo = new LeftLTetronimo(new Cell(TetrisConstants.SCREEN_CENTER_X, TetrisConstants.SPAWN_HEIGHT), boardCells);
+                tetronimo = new LeftLTetronimo(new Cell(TetrisConstants.SCREEN_CENTER_X, TetrisConstants.CELL_SPAWN_HEIGHT), boardCells);
                 break;
             case 1:
-                tetronimo = new RightLTetronimo(new Cell(TetrisConstants.SCREEN_CENTER_X, TetrisConstants.SPAWN_HEIGHT), boardCells);
+                tetronimo = new RightLTetronimo(new Cell(TetrisConstants.SCREEN_CENTER_X, TetrisConstants.CELL_SPAWN_HEIGHT), boardCells);
                 break;
             case 2:
-                tetronimo = new SquareTetronimo(new Cell(TetrisConstants.SCREEN_CENTER_X, TetrisConstants.SPAWN_HEIGHT), boardCells);
+                tetronimo = new SquareTetronimo(new Cell(TetrisConstants.SCREEN_CENTER_X, TetrisConstants.CELL_SPAWN_HEIGHT), boardCells);
                 break;
             case 3:
-                tetronimo = new LineTetronimo(new Cell(TetrisConstants.SCREEN_CENTER_X, TetrisConstants.SPAWN_HEIGHT), boardCells);
+                tetronimo = new LineTetronimo(new Cell(TetrisConstants.SCREEN_CENTER_X, TetrisConstants.CELL_SPAWN_HEIGHT), boardCells);
                 break;
             case 4:
-                tetronimo = new LeftZigzagTetronimo(new Cell(TetrisConstants.SCREEN_CENTER_X, TetrisConstants.SPAWN_HEIGHT), boardCells);
+                tetronimo = new LeftZigzagTetronimo(new Cell(TetrisConstants.SCREEN_CENTER_X, TetrisConstants.CELL_SPAWN_HEIGHT), boardCells);
                 break;
             case 5:
-                tetronimo = new RightZigzagTetronimo(new Cell(TetrisConstants.SCREEN_CENTER_X, TetrisConstants.SPAWN_HEIGHT), boardCells);
+                tetronimo = new RightZigzagTetronimo(new Cell(TetrisConstants.SCREEN_CENTER_X, TetrisConstants.CELL_SPAWN_HEIGHT), boardCells);
                 break;
             case 6:
-                tetronimo = new MountTetronimo(new Cell(TetrisConstants.SCREEN_CENTER_X, TetrisConstants.SPAWN_HEIGHT), boardCells);
+                tetronimo = new MountTetronimo(new Cell(TetrisConstants.SCREEN_CENTER_X, TetrisConstants.CELL_SPAWN_HEIGHT), boardCells);
                 break;
         }
     }
