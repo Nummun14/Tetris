@@ -95,7 +95,7 @@ public class GameScreen implements Screen {
         if (!tetronimo.isFalling()) {
             score += 10;
             updateBoard();
-            if (tetronimo.getHighestPoint(tetronimo.getTetronimoCells()).y >= TetrisConstants.GAME_HEIGHT) {
+            if (tetronimo.getHighestCell(tetronimo.getTetronimoCells()).y >= TetrisConstants.GAME_HEIGHT) {
                 game.setScreen(new GameOverScreen(game, score));
             }
             Array<Integer> fullRows = getFullRows();
@@ -110,27 +110,22 @@ public class GameScreen implements Screen {
 
     @Override
     public void show() {
-
     }
 
     @Override
     public void resize(int width, int height) {
-
     }
 
     @Override
     public void pause() {
-
     }
 
     @Override
     public void resume() {
-
     }
 
     @Override
     public void hide() {
-
     }
 
     @Override
@@ -199,9 +194,8 @@ public class GameScreen implements Screen {
     private void updateBoard() {
         for (Cell boardCell : boardCells) {
             for (Cell cell : tetronimo.getTetronimoCells()) {
-                if (cell.equals(boardCell)) {
+                if (cell.equals(boardCell))
                     boardCell.currentState = cell.currentState;
-                }
             }
         }
     }
@@ -211,9 +205,8 @@ public class GameScreen implements Screen {
             for (int x = 0; x < TetrisConstants.SCREEN_WIDTH; x += TetrisConstants.CELL_SIZE) {
                 Cell aboveCell = getCellAtPosition(x, y + TetrisConstants.CELL_SIZE);
                 Cell currentCell = getCellAtPosition(x, y);
-                if (aboveCell != null && currentCell != null) {
+                if (aboveCell != null && currentCell != null)
                     currentCell.currentState = aboveCell.currentState;
-                }
             }
         }
     }
@@ -221,35 +214,32 @@ public class GameScreen implements Screen {
     private void clearRow(int y) {
         for (int x = 0; x < TetrisConstants.SCREEN_WIDTH; x += TetrisConstants.CELL_SIZE) {
             Cell cell = getCellAtPosition(x, y);
-            if (cell != null) {
+            if (cell != null)
                 cell.currentState = CellState.EMPTY;
-            }
         }
     }
 
     private Array<Integer> getFullRows() {
         Array<Integer> fullRows = new Array<>();
-        for (int i = 0; i < TetrisConstants.SCREEN_HEIGHT; i += TetrisConstants.CELL_SIZE) {
+        for (int cellY = 0; cellY < TetrisConstants.SCREEN_HEIGHT; cellY += TetrisConstants.CELL_SIZE) {
             boolean isRowFull = true;
-            for (int j = 0; j < TetrisConstants.SCREEN_WIDTH; j += TetrisConstants.CELL_SIZE) {
-                Cell cell = getCellAtPosition(j, i);
+            for (int cellX = 0; cellX < TetrisConstants.SCREEN_WIDTH; cellX += TetrisConstants.CELL_SIZE) {
+                Cell cell = getCellAtPosition(cellX, cellY);
                 if (cell == null || !cell.isFull()) {
                     isRowFull = false;
                     break;
                 }
             }
-            if (isRowFull) {
-                fullRows.insert(0, i);
-            }
+            if (isRowFull)
+                fullRows.insert(0, cellY);
         }
         return fullRows;
     }
 
     private Cell getCellAtPosition(int x, int y) {
         for (Cell cell : boardCells) {
-            if (cell.x == x && cell.y == y) {
+            if (cell.x == x && cell.y == y)
                 return cell;
-            }
         }
         return null;
     }
