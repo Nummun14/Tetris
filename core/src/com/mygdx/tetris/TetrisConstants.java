@@ -10,7 +10,7 @@ public class TetrisConstants {
             SCREEN_CENTER_Y = SCREEN_HEIGHT / 2,
             GAME_HEIGHT = 450,
             GAME_WIDTH = 300,
-            CELL_SPAWN_HEIGHT = 480,
+            CELL_SPAWN_HEIGHT = 570,
             GAME_LOWEST_X = 0,
             GAME_LOWEST_Y = 0;
     public static final int CELL_SIZE = 30;

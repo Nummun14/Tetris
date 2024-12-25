@@ -190,33 +190,6 @@ public class GameScreen implements Screen {
         }
     }
 
-    private void createRandomTetronimo() {
-        int random = MathUtils.random(6);
-        switch (random){
-            case 0:
-                tetronimo = new LeftLTetronimo(new Cell(TetrisConstants.SCREEN_CENTER_X, TetrisConstants.CELL_SPAWN_HEIGHT), boardCells);
-                break;
-            case 1:
-                tetronimo = new RightLTetronimo(new Cell(TetrisConstants.SCREEN_CENTER_X, TetrisConstants.CELL_SPAWN_HEIGHT), boardCells);
-                break;
-            case 2:
-                tetronimo = new SquareTetronimo(new Cell(TetrisConstants.SCREEN_CENTER_X, TetrisConstants.CELL_SPAWN_HEIGHT), boardCells);
-                break;
-            case 3:
-                tetronimo = new LineTetronimo(new Cell(TetrisConstants.SCREEN_CENTER_X, TetrisConstants.CELL_SPAWN_HEIGHT), boardCells);
-                break;
-            case 4:
-                tetronimo = new LeftZigzagTetronimo(new Cell(TetrisConstants.SCREEN_CENTER_X, TetrisConstants.CELL_SPAWN_HEIGHT), boardCells);
-                break;
-            case 5:
-                tetronimo = new RightZigzagTetronimo(new Cell(TetrisConstants.SCREEN_CENTER_X, TetrisConstants.CELL_SPAWN_HEIGHT), boardCells);
-                break;
-            case 6:
-                tetronimo = new MountTetronimo(new Cell(TetrisConstants.SCREEN_CENTER_X, TetrisConstants.CELL_SPAWN_HEIGHT), boardCells);
-                break;
-        }
-    }
-
     private void updateBoard() {
         for (Cell boardCell : boardCells) {
             for (Cell cell : tetronimo.getTetronimoCells()) {
@@ -268,5 +241,32 @@ public class GameScreen implements Screen {
                 return cell;
         }
         return null;
+    }
+
+    private void createRandomTetronimo() {
+        int random = MathUtils.random(6);
+        switch (random){
+            case 0:
+                tetronimo = new LeftLTetronimo(new Cell(TetrisConstants.SCREEN_CENTER_X, TetrisConstants.CELL_SPAWN_HEIGHT), boardCells);
+                break;
+            case 1:
+                tetronimo = new RightLTetronimo(new Cell(TetrisConstants.SCREEN_CENTER_X, TetrisConstants.CELL_SPAWN_HEIGHT), boardCells);
+                break;
+            case 2:
+                tetronimo = new SquareTetronimo(new Cell(TetrisConstants.SCREEN_CENTER_X, TetrisConstants.CELL_SPAWN_HEIGHT), boardCells);
+                break;
+            case 3:
+                tetronimo = new LineTetronimo(new Cell(TetrisConstants.SCREEN_CENTER_X, TetrisConstants.CELL_SPAWN_HEIGHT), boardCells);
+                break;
+            case 4:
+                tetronimo = new LeftZigzagTetronimo(new Cell(TetrisConstants.SCREEN_CENTER_X, TetrisConstants.CELL_SPAWN_HEIGHT), boardCells);
+                break;
+            case 5:
+                tetronimo = new RightZigzagTetronimo(new Cell(TetrisConstants.SCREEN_CENTER_X, TetrisConstants.CELL_SPAWN_HEIGHT), boardCells);
+                break;
+            case 6:
+                tetronimo = new MountTetronimo(new Cell(TetrisConstants.SCREEN_CENTER_X, TetrisConstants.CELL_SPAWN_HEIGHT), boardCells);
+                break;
+        }
     }
 }
