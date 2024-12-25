@@ -47,67 +47,19 @@ public class GameScreen implements Screen {
         lastMovedDownTime = 0;
         lastRotateTime = 0;
 
-        spawnTetromino();
+        createRandomTetronimo();
     }
 
     @Override
     public void render(float delta) {
         ScreenUtils.clear(Color.BLACK);
-
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
-
-        game.batch.begin();
-        drawCells();
-        drawLimitLine();
-        game.font.draw(game.batch, "Score:" + score, TetrisConstants.SCORE_X, TetrisConstants.SCORE_Y);
-        drawTetromino();
-        game.batch.end();
-
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) {
-            if (TimeUtils.timeSinceMillis(lastMovedRightTime) > TetrisConstants.TIME_BETWEEN_MOVES_MILLISECONDS) {
-                tetronimo.moveRight(boardCells);
-                lastMovedRightTime = TimeUtils.millis();
-            }
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) {
-            if (TimeUtils.timeSinceMillis(lastMovedLeftTime) > TetrisConstants.TIME_BETWEEN_MOVES_MILLISECONDS) {
-                tetronimo.moveLeft(boardCells);
-                lastMovedLeftTime = TimeUtils.millis();
-            }
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S)) {
-            if (TimeUtils.timeSinceMillis(lastMovedDownTime) > TetrisConstants.TIME_BETWEEN_MOVES_MILLISECONDS) {
-                tetronimo.moveDown(boardCells);
-                score += 1;
-                lastMovedDownTime = TimeUtils.millis();
-            }
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)) {
-            if (TimeUtils.timeSinceMillis(lastRotateTime) > TetrisConstants.TIME_BETWEEN_MOVES_MILLISECONDS) {
-                tetronimo.rotate(boardCells);
-                lastRotateTime = TimeUtils.millis();
-            }
-        }
-
-        if (TimeUtils.timeSinceMillis(lastMovedDownTime) > TetrisConstants.TIME_BETWEEN_DROPS_MILLISECONDS) {
-            tetronimo.moveDown(boardCells);
-            lastMovedDownTime = TimeUtils.millis();
-        }
+        updateScreen();
+        moveTetronimo();
 
         if (!tetronimo.isFalling()) {
-            score += 10;
-            updateBoard();
-            if (tetronimo.getHighestCell(tetronimo.getTetronimoCells()).y >= TetrisConstants.GAME_HEIGHT) {
-                game.setScreen(new GameOverScreen(game, score));
-            }
-            Array<Integer> fullRows = getFullRows();
-            for (Integer fullRow : fullRows) {
-                clearRow(fullRow);
-                moveRowsDown(fullRow);
-                score += 75;
-            }
-            spawnTetromino();
+            spawnNewTetronimo();
         }
     }
 
@@ -135,6 +87,77 @@ public class GameScreen implements Screen {
     public void dispose() {
         CellConstants.disposeCellImages();
         limitLine.dispose();
+    }
+
+    private void updateScreen() {
+        game.batch.begin();
+        drawCells();
+        drawLimitLine();
+        game.font.draw(game.batch, "Score:" + score, TetrisConstants.SCORE_X, TetrisConstants.SCORE_Y);
+        drawTetromino();
+        game.batch.end();
+    }
+
+    private void spawnNewTetronimo() {
+        score += 10;
+        updateBoard();
+        if (tetronimo.getHighestCell(tetronimo.getTetronimoCells()).y >= TetrisConstants.GAME_HEIGHT)
+            game.setScreen(new GameOverScreen(game, score));
+        Array<Integer> fullRows = getFullRows();
+        for (Integer fullRow : fullRows) {
+            clearRow(fullRow);
+            moveRowsDown(fullRow);
+            score += 75;
+        }
+        createRandomTetronimo();
+    }
+
+    private void moveTetronimo() {
+        rotateTetronimo();
+        moveTetronimoRight();
+        moveTetronimoLeft();
+        moveTetronimoDown();
+    }
+
+    private void moveTetronimoRight() {
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) {
+            if (TimeUtils.timeSinceMillis(lastMovedRightTime) > TetrisConstants.TIME_BETWEEN_MOVES_MILLISECONDS) {
+                tetronimo.moveRight(boardCells);
+                lastMovedRightTime = TimeUtils.millis();
+            }
+        }
+    }
+
+    private void moveTetronimoLeft() {
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) {
+            if (TimeUtils.timeSinceMillis(lastMovedLeftTime) > TetrisConstants.TIME_BETWEEN_MOVES_MILLISECONDS) {
+                tetronimo.moveLeft(boardCells);
+                lastMovedLeftTime = TimeUtils.millis();
+            }
+        }
+    }
+
+    private void moveTetronimoDown() {
+        if (Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S)) {
+            if (TimeUtils.timeSinceMillis(lastMovedDownTime) > TetrisConstants.TIME_BETWEEN_MOVES_MILLISECONDS) {
+                tetronimo.moveDown(boardCells);
+                score += 1;
+                lastMovedDownTime = TimeUtils.millis();
+            }
+        }
+        if (TimeUtils.timeSinceMillis(lastMovedDownTime) > TetrisConstants.TIME_BETWEEN_DROPS_MILLISECONDS) {
+            tetronimo.moveDown(boardCells);
+            lastMovedDownTime = TimeUtils.millis();
+        }
+    }
+
+    private void rotateTetronimo() {
+        if (Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)) {
+            if (TimeUtils.timeSinceMillis(lastRotateTime) > TetrisConstants.TIME_BETWEEN_MOVES_MILLISECONDS) {
+                tetronimo.rotate(boardCells);
+                lastRotateTime = TimeUtils.millis();
+            }
+        }
     }
 
     private void drawLimitLine() {
@@ -167,7 +190,7 @@ public class GameScreen implements Screen {
         }
     }
 
-    private void spawnTetromino() {
+    private void createRandomTetronimo() {
         int random = MathUtils.random(6);
         switch (random){
             case 0:
