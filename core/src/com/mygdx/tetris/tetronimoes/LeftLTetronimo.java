@@ -18,11 +18,7 @@ public class LeftLTetronimo extends Tetronimo {
         newCells.add(new Cell(tetronimoCells.get(0).x + TetrisConstants.CELL_SIZE, tetronimoCells.get(0).y - TetrisConstants.CELL_SIZE, tetronimoCells.get(0).currentState));
 
         if (isPlaceable(newCells, boardCells)) {
-            isRotationStateUp = true;
-            isRotationStateRight = false;
-            isRotationStateDown = false;
-            isRotationStateLeft = false;
-
+            currentRotationState = TetronimoState.UP;
             tetronimoCells = newCells;
         }
     }
@@ -36,11 +32,7 @@ public class LeftLTetronimo extends Tetronimo {
         newCells.add(new Cell(tetronimoCells.get(0).x - TetrisConstants.CELL_SIZE, tetronimoCells.get(0).y - TetrisConstants.CELL_SIZE, tetronimoCells.get(0).currentState));
 
         if (isPlaceable(newCells, boardCells)) {
-            isRotationStateRight = true;
-            isRotationStateUp = false;
-            isRotationStateDown = false;
-            isRotationStateLeft = false;
-
+            currentRotationState = TetronimoState.RIGHT;
             tetronimoCells = newCells;
         }
     }
@@ -54,11 +46,7 @@ public class LeftLTetronimo extends Tetronimo {
         newCells.add(new Cell(tetronimoCells.get(0).x - TetrisConstants.CELL_SIZE, tetronimoCells.get(0).y + TetrisConstants.CELL_SIZE, tetronimoCells.get(0).currentState));
 
         if (isPlaceable(newCells, boardCells)) {
-            isRotationStateDown = true;
-            isRotationStateUp = false;
-            isRotationStateRight = false;
-            isRotationStateLeft = false;
-
+            currentRotationState = TetronimoState.DOWN;
             tetronimoCells = newCells;
         }
     }
@@ -72,11 +60,7 @@ public class LeftLTetronimo extends Tetronimo {
         newCells.add(new Cell(tetronimoCells.get(0).x + TetrisConstants.CELL_SIZE, tetronimoCells.get(0).y + TetrisConstants.CELL_SIZE, tetronimoCells.get(0).currentState));
 
         if (isPlaceable(newCells, boardCells)) {
-            isRotationStateLeft = true;
-            isRotationStateUp = false;
-            isRotationStateRight = false;
-            isRotationStateDown = false;
-
+            currentRotationState = TetronimoState.LEFT;
             tetronimoCells = newCells;
         }
     }

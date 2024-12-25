@@ -3,7 +3,7 @@ package com.mygdx.tetris.cell;
 import com.badlogic.gdx.graphics.Texture;
 
 public enum CellState {
-    EMPTY(CellConstants.EMPTY_TEXTURE),
+    EMPTY(null),
     RED(CellConstants.RED_TEXTURE),
     GREEN(CellConstants.GREEN_TEXTURE),
     BLUE(CellConstants.BLUE_TEXTURE),

@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class CellConstants {
     private static final String
-            EMPTY_IMAGE_NAME = "blackSquare.png",
             RED_IMAGE_NAME = "redSquare.png",
             GREEN_IMAGE_NAME = "greenSquare.png",
             BLUE_IMAGE_NAME = "blueSquare.png",
@@ -13,7 +12,6 @@ public class CellConstants {
             PURPLE_IMAGE_NAME = "purpleSquare.png",
             ORANGE_IMAGE_NAME = "orangeSquare.png";
     static final Texture
-            EMPTY_TEXTURE = new Texture(EMPTY_IMAGE_NAME),
             RED_TEXTURE = new Texture(RED_IMAGE_NAME),
             GREEN_TEXTURE = new Texture(GREEN_IMAGE_NAME),
             BLUE_TEXTURE = new Texture(BLUE_IMAGE_NAME),
@@ -23,7 +21,6 @@ public class CellConstants {
             ORANGE_TEXTURE = new Texture(ORANGE_IMAGE_NAME);
 
     public static void disposeCellImages() {
-        EMPTY_TEXTURE.dispose();
         RED_TEXTURE.dispose();
         GREEN_TEXTURE.dispose();
         BLUE_TEXTURE.dispose();
