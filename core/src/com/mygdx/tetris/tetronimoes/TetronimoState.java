@@ -5,7 +5,4 @@ public enum TetronimoState {
     LEFT,
     UP,
     RIGHT;
-
-    TetronimoState() {
-    }
 }

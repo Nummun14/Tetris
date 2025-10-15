@@ -1,12 +1,7 @@
 package com.mygdx.tetris.cell;
 
-import com.mygdx.tetris.TetrisConstants;
-
-import java.awt.*;
-
 public class Cell {
     public CellState currentState;
-    public Rectangle rectangle;
     public int x, y;
 
     public Cell() {
@@ -20,7 +15,6 @@ public class Cell {
     public Cell(int x, int y, CellState currentState) {
         this.x = x;
         this.y = y;
-        rectangle = new Rectangle(x, y, TetrisConstants.CELL_SIZE, TetrisConstants.CELL_SIZE);
         this.currentState = currentState;
     }
 
