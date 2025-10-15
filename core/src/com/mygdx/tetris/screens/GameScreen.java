@@ -41,12 +41,7 @@ public class GameScreen implements Screen {
         camera.setToOrtho(false, TetrisConstants.SCREEN_WIDTH, TetrisConstants.SCREEN_HEIGHT);
 
         boardCells = new Array<>();
-        score = 0;
-        lastMovedRightTime = 0;
-        lastMovedLeftTime = 0;
-        lastMovedDownTime = 0;
-        lastRotateTime = 0;
-
+        initializeVariables();
         createRandomTetronimo();
     }
 
@@ -238,6 +233,14 @@ public class GameScreen implements Screen {
                 return cell;
         }
         return null;
+    }
+
+    private void initializeVariables() {
+        score = 0;
+        lastMovedRightTime = 0;
+        lastMovedLeftTime = 0;
+        lastMovedDownTime = 0;
+        lastRotateTime = 0;
     }
 
     private void createRandomTetronimo() {
